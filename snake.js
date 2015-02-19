@@ -237,6 +237,7 @@ Element.prototype.setY = function(y) {
 
 function initControls() {
 	window.onkeydown = keyDownHandler;
+	window.ontouchstart = touchStartHandler;
 }
 
 
@@ -260,13 +261,45 @@ function touchStartHandler(e) {
 *	Translates touch position into left and right movement.
 */
 function translateTouch(e) {
-	e.x = e.touches[0].pageX;
-	var center = player.x + player.width/2;
-	if(e.x < center) {
-		player.left = true;
-		player.right = false;
-	} else {
-		player.right = true;
-		player.left = false;
+	var x = e.touches[0].pageX;
+	var y = e.touches[0].pageY;
+	head = snake[0];
+	
+	//Calculate as if in a coordinate system with head at the center
+	x = x - head.x + baseDimension / 2;
+	y = y - head.y + baseDimension / 2;
+	
+	if(x >= 0 && y >= 0) {
+		if(x / y > 1) {
+			
+			//Move right
+			head.orientation = 1;
+		} else {
+			head.orientation = 2;
+		}
+	} else if (x >= 0 && y <= 0) {
+		if(x / Math.abs(y) > 1) {
+			
+			//move right
+			head.orientation = 1;
+		} else {
+			head.orientation = 4;
+		}
+	} else if ( x <= 0 && y <= 0) {
+		if(Math.abs(x / y) > 1) {
+			
+			//move left
+			head.orientation = 3;
+		} else {
+			head.orientation = 4;
+		}
+	} else if (x <= 0 && y >= 0) {
+		if(Math.abs(x) / y > 1) {
+			
+			//move left
+			head.orientation = 3;
+		} else {
+			head.orientation = 2;
+		}
 	}
 }
