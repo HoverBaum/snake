@@ -1,8 +1,5 @@
-//orientation of the snake. 1-4 for right, down, left, up.
-
-
 var Game = (function() {
-	
+	//orientation of the snake. 1-4 for right, down, left, up.
 
 	//The base width and height of a single element.
 	var baseDimension = 10;
@@ -263,13 +260,13 @@ var Game = (function() {
 
 	function keyDownHandler(e) {
 		if(e.keyCode === 65 || e.keyCode === 37) {
-			snake[0].orientation = 3;
+			if(snake[0].orientation !== 1) snake[0].orientation = 3;
 		}else if(e.keyCode === 68 || e.keyCode === 39) {
-			snake[0].orientation = 1;
+			if(snake[0].orientation !== 3) snake[0].orientation = 1;
 		}else if(e.keyCode === 83 || e.keyCode === 40) {
-			snake[0].orientation = 2;
+			if(snake[0].orientation !== 4) snake[0].orientation = 2;
 		}else if(e.keyCode === 87 || e.keyCode === 38) {
-			snake[0].orientation = 4;
+			if(snake[0].orientation !== 2) snake[0].orientation = 4;
 		}
 	}
 	function touchStartHandler(e) {
@@ -293,33 +290,33 @@ var Game = (function() {
 			if(x / y > 1) {
 
 				//Move right
-				head.orientation = 1;
+				if(head.orientation !== 3) head.orientation = 1;
 			} else {
-				head.orientation = 2;
+				if(head.orientation !== 4) head.orientation = 2;
 			}
 		} else if (x >= 0 && y <= 0) {
 			if(x / Math.abs(y) > 1) {
 
 				//move right
-				head.orientation = 1;
+				if(head.orientation !== 3) head.orientation = 1;
 			} else {
-				head.orientation = 4;
+				if(head.orientation !== 2) head.orientation = 4;
 			}
 		} else if ( x <= 0 && y <= 0) {
 			if(Math.abs(x / y) > 1) {
 
 				//move left
-				head.orientation = 3;
+				if(head.orientation !== 1) head.orientation = 3;
 			} else {
-				head.orientation = 4;
+				if(head.orientation !== 2) head.orientation = 4;
 			}
 		} else if (x <= 0 && y >= 0) {
 			if(Math.abs(x) / y > 1) {
 
 				//move left
-				head.orientation = 3;
+				if(head.orientation !== 1) head.orientation = 3;
 			} else {
-				head.orientation = 2;
+				if(head.orientation !== 4) head.orientation = 2;
 			}
 		}
 	}
