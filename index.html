@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Untitled Document</title>
+    <title>Snake</title>
     <style>
         * {
             padding: 0;
@@ -61,7 +61,7 @@
     <script>
         Game.start();
 		Game.setGameOverCallback(gameOver);
-		
+
 		function gameOver(text) {
 			document.getElementById("endgame").style.display = "block";
 			document.getElementById("endgame").style.opacity = "1";
